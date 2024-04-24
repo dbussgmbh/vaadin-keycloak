@@ -6,6 +6,59 @@ This project demonstrate the integration of Keycloak with Vaadin.
 
     docker run -d -p 8180:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:20.0.1 start-dev
 
+## Configure Keycloak
+
+Next we must create a realm and a user, add roles to the user, and finally, a client.
+
+Create a realm
+
+    Click on the drop-down in the upper left corner and select “Create realm”
+    Enter the realm name “vaadin” and save
+
+Create realm roles
+
+    Select “Realm roles” in the menu
+    Click “Create role”
+    Enter the role name “admin” and save
+    Repeat steps 1 to 3 with the role “user”
+
+Create users
+
+    Select “Users” in the menu
+    Click on “Create new user”
+    Enter the user name “admin”
+    Click on “Create”
+    Select the tab “Credentials” and set a password
+    Disable “Temporary” to prevent having to update the password on the first login
+    Click “Save”
+    Select the tab “Role mapping”
+    Click on “Assign role”
+    Choose the previously created roles “admin” and “user”
+    Do the same for the user with username “user” but add only the role “user”
+
+Create a client
+
+    Select “Client” in the menu
+    Click on “Create client”
+    Enter the client id “vaadin”
+    Click next and the save
+    In the “Access settings” set
+        “Valid redirect URIs” to http://localhost:8080/*
+        “Web origins” to http://localhost:8080
+
+Important: Role Mapping
+
+Now comes a crucial step. We must disable the role mapping to the ID token. When I created the example, the roles were missing in the application, but thanks to Thomas Vitale’s answer on StackOverflow, I found the solution.
+
+    Select “Client scopes”
+    Select the client scope “roles”
+    Click on the tab “Mappers”
+    Select “realm roles”
+    Disable “Add to ID token”
+
+The configuration must look like this:
+
+
 ## Running the application
 
 The project is a standard Maven project. To run it from the command line,
