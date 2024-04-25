@@ -58,7 +58,8 @@ Now comes a crucial step. We must disable the role mapping to the ID token. When
 
 The configuration must look like this:
 ![Config](misc/image.png)
-
+in new Version:
+![Config_new](misc/Realm_neu.png)
 
 ## Running the application
 
