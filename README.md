@@ -57,6 +57,7 @@ Now comes a crucial step. We must disable the role mapping to the ID token. When
     Disable “Add to ID token”
 
 The configuration must look like this:
+![Config](.misc/image.png)
 
 
 ## Running the application
